@@ -137,7 +137,7 @@
 
 // Change these configuration options if needed, see above descriptions for info.
 $enable_jsonp    = false;
-$enable_native   = false;
+$enable_native   = true;
 $valid_url_regex = '/.*/';
 
 // ############################################################################
@@ -161,7 +161,8 @@ if ( !$url ) {
   
   if ( strtolower($_SERVER['REQUEST_METHOD']) == 'post' ) {
     curl_setopt( $ch, CURLOPT_POST, true );
-    curl_setopt( $ch, CURLOPT_POSTFIELDS, $_POST );
+    // curl_setopt( $ch, CURLOPT_POSTFIELDS, $_POST );
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, file_get_contents('php://input') );
   }
   
   if ( $_GET['send_cookies'] ) {
