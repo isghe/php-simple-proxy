@@ -138,6 +138,7 @@
 // Change these configuration options if needed, see above descriptions for info.
 $enable_jsonp    = false;
 $enable_native   = true;
+$enable_force_header = true;
 $valid_url_regex = '/.*/';
 
 // ############################################################################
@@ -201,8 +202,9 @@ if ( $_GET['mode'] == 'native' ) {
   }
   
   // Propagate headers to response.
+
   foreach ( $header_text as $header ) {
-    if ( preg_match( '/^(?:Content-Type|Content-Language|Set-Cookie):/i', $header ) ) {
+    if ((true == $enable_force_header) || preg_match( '/^(?:Content-Type|Content-Language|Set-Cookie):/i', $header ) ) {
       header( $header );
     }
   }
